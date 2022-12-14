@@ -7,153 +7,144 @@
         </ul>
       
     </div>
-    <div class="abs-center">
-      <div class="card center border-danger mt-5" style="height: 26em">
-        <div class="card-body">
-          <h4 class="card-title">Ingrese sus datos de Pago:</h4>
-          <hr />
+    <form ref="form" @submit.prevent="enviarForm">
+        <div class="abs-center">
+        <div class="card center border-danger mt-5" style="height: 26em">
+            <div class="card-body">
+            <h4 class="card-title">Ingrese sus datos de Pago:</h4>
+            <hr />
 
-          <!-- linea 1 -->
-          <div class="row">
-            <div class="col-md-12">
-              <span class="help-block text-muted float-start"
-                ><small>Nro. Tarjeta de Credito</small></span
-              >
+            <!-- linea 1 -->
+            <div class="row">
+                <div class="col-md-12">
+                <span class="help-block text-muted float-start"
+                    ><small>Nro. Tarjeta de Credito</small></span
+                >
 
-              <the-mask
-                v-model="nroCredito"
-                type="text"
-                class="form-control"
-                :mask="['####-####-####-####']"
-              />
+                <the-mask
+                    v-model="nroCredito"
+                    type="text"
+                    class="form-control"
+                    :mask="['####-####-####-####']"
+                />
+                </div>
             </div>
-          </div>
 
-          <!-- linea 2 -->
-          <div class="row mt-2">
-            <div class="col-md-3 col-sm-3 col-xs-3">
-              <span class="help-block text-muted small-font"
-                ><small>Exp.Mes</small></span
-              >
-              <input
-                v-model="expMes"
-                type="number"
-                class="form-control"
-                min="1"
-                max="12"
-              />
+            <!-- linea 2 -->
+            <div class="row mt-2">
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                <span class="help-block text-muted small-font"
+                    ><small>Exp.Mes</small></span
+                >
+                <input
+                    v-model="expMes"
+                    type="number"
+                    class="form-control"
+                    min="1"
+                    max="12"
+                />
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                <span class="help-block text-muted small-font"
+                    ><small>Exp.Año</small></span
+                >
+                <input
+                    v-model="expAnio"
+                    type="number"
+                    min="2022"
+                    class="form-control"
+                    placeholder="YY"
+                />
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                <span class="help-block text-muted small-font"
+                    ><small>CCV</small></span
+                >
+                <input
+                    v-model="ccv"
+                    type="text"
+                    class="form-control"
+                    placeholder="CCV"
+                    
+                />
+                </div>
+                <div class="col-md-1">
+                <span class="help-block text-muted small-font"
+                    ><small>-</small></span
+                >
+                <img
+                    src="../assets/tarjeta1.png"
+                    alt="tarjeta de credito"
+                    width="50"
+                    class="rounded"
+                />
+                </div>
             </div>
-            <div class="col-md-3 col-sm-3 col-xs-3">
-              <span class="help-block text-muted small-font"
-                ><small>Exp.Año</small></span
-              >
-              <input
-                v-model="expAnio"
-                type="number"
-                min="2022"
-                class="form-control"
-                placeholder="YY"
-              />
+            <!-- linea 3 -->
+            <div class="row mt-2">
+                <div class="col-md-12">
+                <span class="help-block text-muted small-font"
+                    ><small>Nombre como figura en la Tarjeta</small></span
+                >
+                <input
+                    v-model="nombreTarjeta"
+                    type="text"
+                    class="form-control"
+                    placeholder="Nombre como en la tarjeta"
+                />
+                </div>
             </div>
-            <div class="col-md-3 col-sm-3 col-xs-3">
-              <span class="help-block text-muted small-font"
-                ><small>CCV</small></span
-              >
-              <input
-                v-model="ccv"
-                type="text"
-                class="form-control"
-                placeholder="CCV"
-                
-              />
+            <!-- linea  -->
+            <div class="row mt-2">
+                <div class="col-md-12">
+                <span class="help-block text-muted small-font"
+                    ><small>Ingrese su Email para enviar comprobante</small></span
+                >
+                <input
+                    v-model="emailCliente"
+                    type="email"
+                    class="form-control"
+                    placeholder="Ingrese un email"
+                />
+                </div>
             </div>
-            <div class="col-md-1">
-              <span class="help-block text-muted small-font"
-                ><small>-</small></span
-              >
-              <img
-                src="../assets/tarjeta1.png"
-                alt="tarjeta de credito"
-                width="50"
-                class="rounded"
-              />
-            </div>
-          </div>
-          <!-- linea 3 -->
-          <div class="row mt-2">
-            <div class="col-md-12">
-              <span class="help-block text-muted small-font"
-                ><small>Nombre como figura en la Tarjeta</small></span
-              >
-              <input
-                v-model="nombreTarjeta"
-                type="text"
-                class="form-control"
-                placeholder="Nombre como en la tarjeta"
-              />
-            </div>
-          </div>
-          <!-- linea  -->
-          <div class="row mt-2">
-            <div class="col-md-12">
-              <span class="help-block text-muted small-font"
-                ><small>Ingrese su Email para enviar comprobante</small></span
-              >
-              <input
-                v-model="emailCliente"
-                type="email"
-                class="form-control"
-                placeholder="Ingrese un email"
-              />
-            </div>
-          </div>
 
-          <!-- linea 4 -->
-          <div class="row mt-2">
-            <div class="col">
-              <input
-                type="submit"
-                class="btn btn-warning btn-block float-end"
-                value="Pagar Ahora"
-                @click="agregar()"
-                :disabled="desabilitar"
-              />
+            <!-- linea 4 -->
+            <div class="row mt-2">
+                <div class="col">
+                    <input
+                        type="button"
+                        class="btn btn-secondary btn-block float-start"
+                        value="Limpiar"
+                        @click="limpiarForm()"
+                    />
+                    <input
+                        type="submit"
+                        class="btn btn-warning btn-block float-end"
+                        value="Pagar Ahora"
+                        :disabled="desabilitar"
+                    />
+                </div>
             </div>
-          </div>
+            </div>
         </div>
-      </div>
-    </div>
-
-    <table class="table mt-5" >
-      <thead class="bg-dark text-white">
-        <tr>
-          <td>Nro.Tarjeta</td>
-          <td>Mes que Expira</td>
-          <td>Año que Expira</td>
-          <td>Codigo de Seguridad</td>
-          <td>Importe</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, index) of pago" :key="index">
-          <td>{{ item.expMes }}</td>
-          <td>{{ item.expAnio }}</td>
-          <td>{{ item.ccv }}</td>
-          <td>{{ item.nombreTarjeta }}</td>
-          <td>$ {{ item.importe }} .-</td>
-        </tr>
-      </tbody>
-    </table>
+        </div>
+    </form>
+    <tabla-datos :pagos="pago"/>
+    
+    
   </div>
 </template>
 
 <script>
 import { TheMask } from "vue-the-mask";
+import TablaDatos from './TablaDatos.vue';
 
 export default {
   name: "FormularioWeb",
-  components: { TheMask },
+  components: { TheMask, TablaDatos },
   data() {
+  
     return {
       nroCredito: "",
       expMes: 1,
@@ -163,14 +154,13 @@ export default {
       emailCliente:"",
       pago: [],
       miPago: {},
-
       errores: [],
       desabilitar: false,
     };
   },
 
   methods: {
-    agregar() {
+    enviarForm() {
       /* cuando entro en la funcion desabilito el boton */
       this.desabilitar = !this.desabilitar;
       /* hice un importe aleatoreo */
@@ -189,12 +179,14 @@ export default {
         };
         this.pago.push(this.miPago);
         /* habilito el boton */
-        this.desabilitar = !this.desabilitar;
+        this.desabilitar = true;
+        this.limpiarForm()
       }
 
       setTimeout(() => {
         this.errores = [];
         this.desabilitar = false;
+        
       }, 5000);
     },
     validarForm(){
@@ -206,8 +198,8 @@ export default {
       if (this.nombreTarjeta == 0) this.errores.push("Nombre de la tarjeta");
       if (!this.emailCliente.includes('@')) this.errores.push("No es un Email Correcto");  
      
-      if (this.ccv.length != 3) this.errores.push("Codigo de seguridad debe tener 3 dígitos");
-      console.log(this.ccv.length)
+      //   if (this.ccv.length != 3) this.errores.push("Codigo de seguridad debe tener 3 dígitos");
+   
       /* parseo el ccv */
       this.ccv = +this.ccv
       if (isNaN(this.ccv)){
@@ -216,7 +208,18 @@ export default {
           this.errores.push("Codigo de seguridad debe ser un numero");
        } else if(typeof this.ccv != 'number') this.errores.push("Codigo de seguridad debe ser un numero")
 
-      
+    },
+    limpiarForm(){
+       /*  this.$refs.form.reset() */
+        this.miPago = {}
+        this.nroCredito= ""
+        this.expMes= 1
+        this.expAnio= "2022"
+        this.ccv= ""
+        this.nombreTarjeta= ""
+        this.emailCliente=""
+        this.miPago= {}
+        
     }
   },
   computed: {

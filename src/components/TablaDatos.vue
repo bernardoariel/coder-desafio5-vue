@@ -1,20 +1,22 @@
 <template>
     <div>
-        <table class="table">
-            <thead>
+        <table class="table mt-5" >
+            <thead class="bg-dark text-white">
                 <tr>
                     <td>Nro.Tarjeta</td>
                     <td>Mes que Expira</td>
                     <td>Año que Expira</td>
                     <td>Codigo de Seguridad</td>
+                    <td>Importe</td>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(item,index) of datos" :key="index">
-                    <td>{{ this.datos.expMes }}</td>
-                    <td>{{ this.datos.expAnio }}</td>
-                    <td>{{ this.datos.ccv }}</td>
-                    <td>{{ this.datos.nombreTarjeta }}</td>
+                <tr v-for="(item, index) of pagos" :key="index">
+                    <td>{{ item.expMes }}</td>
+                    <td>{{ item.expAnio }}</td>
+                    <td>{{ item.ccv }}</td>
+                    <td>{{ item.nombreTarjeta }}</td>
+                    <td>$ {{ item.importe }} .-</td>
                 </tr>
             </tbody>
         </table>
@@ -25,7 +27,7 @@
 export default {
     name: 'TablaDatos',
     props: {
-        pago: {
+        pagos: {
         type: Array,
         required: true
      }
