@@ -31,12 +31,7 @@ export default new Vuex.Store({
   },
 
   getters: {
-    obtenerTotal(state){
-      return state.totalPagos
-    },
-    obtenerPagos(state){
-      return state.transacciones
-    },
+   
     ultimasTransacciones: state => {
       return state.transacciones.slice(state.transacciones.length - 5, state.transacciones.length).reverse();
     },
@@ -49,7 +44,7 @@ export default new Vuex.Store({
     todosLosPagos(state,transaccionesApi){
       state.transacciones= transaccionesApi
     },
-    ACTUALIZAR_TRANSACCIONES(state, transacciones) {
+    actualizarTransacciones(state, transacciones) {
       state.transacciones = transacciones;
     },
     actualizarUltimoPago(state, ultimoPago) {
@@ -67,7 +62,7 @@ export default new Vuex.Store({
       // Hacer la llamada a la API
       const {data} = await axios.get('https://63aa17bc7d7edb3ae6204df2.mockapi.io/pago');
       // Ejecutar la mutación para actualizar el estado con las transacciones obtenidas de la API
-      commit('ACTUALIZAR_TRANSACCIONES', data);
+      commit('actualizarTransacciones', data.slice(-20));
     },
     // Acción para agregar una nueva transacción
     agregarTransaccion: async function({commit}, transaccion) {
@@ -77,7 +72,7 @@ export default new Vuex.Store({
         // Si se agregó correctamente, obtener de nuevo todas las transacciones de la API
         // y ejecutar la mutación para actualizar el estado
         const {data} = await axios.get('https://63aa17bc7d7edb3ae6204df2.mockapi.io/pago');
-        commit('ACTUALIZAR_TRANSACCIONES', data);
+        commit('actualizarTransacciones', data.slice(-20));
       }
     },
     actualizarUltimoPago: function({commit}, ultimoPago) {

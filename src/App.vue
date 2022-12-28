@@ -17,19 +17,28 @@
 <script>
 
 import {  mapGetters, mapState } from 'vuex';
+
 export default{
- computed:{
-  ...mapState(['obtenerTotal','transacciones','ultimoPago']),
-  ...mapGetters(['obtenerUltimoImporte'])
- },
- mounted() {
+  data() {
+    return {
+      pagos: [],
+      total: 0
+    }
+  },
+  mounted() {
     // Ejecutar la acción para obtener las transacciones de la API
     this.$store.dispatch('obtenerTransacciones');
     const ultimoElemento = this.transacciones[this.transacciones.length - 1];
     const ultimoValor = ultimoElemento.importe;
     this.$store.commit('actualizarUltimoPago', ultimoValor);
-
+  
   },
+ computed:{
+  ...mapState(['transacciones']),
+  ...mapGetters(['obtenerUltimoImporte'])
+ },
+
+ 
 }
 </script>
 

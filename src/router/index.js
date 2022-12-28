@@ -19,6 +19,9 @@ const routes = [
     path: '/todos',
     name: 'todos',
     component: () => import(/* webpackChunkName: "about" */ '../views/RegistrosView.vue')
+  },{
+    path:'*',
+    redirect:'/'
   }
 ]
 

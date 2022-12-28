@@ -191,14 +191,7 @@ export default {
           emailCliente: this.emailCliente,
           importe,
         };
-        //Agrego en mockapi
-        // const response = await axios.post(this.baseURL, this.miPago);
-        // if (response.status === 201) { //si se agrega
-           
-           
-        //    this.mostrarPagos()
-            
-        // }
+        
         this.$store.dispatch('agregarTransaccion', this.miPago);
         const ultimoPago = this.$store.state.transacciones[this.$store.state.transacciones.length - 1].importe;
         this.$store.dispatch('actualizarUltimoPago', ultimoPago);               
