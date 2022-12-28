@@ -130,7 +130,7 @@
         </div>
         </div>
     </form>
-    <tabla-datos :pagos="pago"/>
+    <tabla-datos titulo="Mostrando ultimos 5 pagos"/>
     
     
   </div>
@@ -139,7 +139,7 @@
 <script>
 import { TheMask } from "vue-the-mask";
 import TablaDatos from './TablaDatos.vue';
-
+import axios from "axios";
 export default {
   name: "FormularioWeb",
   components: { TheMask, TablaDatos },
@@ -156,11 +156,24 @@ export default {
       miPago: {},
       errores: [],
       desabilitar: false,
+      baseURL:'https://63aa17bc7d7edb3ae6204df2.mockapi.io/pago'
     };
   },
 
+  mounted() {
+        this.mostrarPagos();
+  },
+
   methods: {
-    enviarForm() {
+    async mostrarPagos(){
+        //vacio el array
+        this.pago = [];
+        //traigo los datos de mokapi
+        const {data} = await axios.get(this.baseURL);
+        this.pago = data.slice(1,4)
+        //cargarlo en el state
+    },
+    async enviarForm() {
       /* cuando entro en la funcion desabilito el boton */
       this.desabilitar = !this.desabilitar;
       /* hice un importe aleatoreo */
@@ -175,9 +188,22 @@ export default {
           expAnio: this.expAnio,
           ccv: this.ccv,
           nombreTarjeta: this.nombreTarjeta,
+          emailCliente: this.emailCliente,
           importe,
         };
-        this.pago.push(this.miPago);
+        //Agrego en mockapi
+        // const response = await axios.post(this.baseURL, this.miPago);
+        // if (response.status === 201) { //si se agrega
+           
+           
+        //    this.mostrarPagos()
+            
+        // }
+        this.$store.dispatch('agregarTransaccion', this.miPago);
+        const ultimoPago = this.$store.state.transacciones[this.$store.state.transacciones.length - 1].importe;
+        this.$store.dispatch('actualizarUltimoPago', ultimoPago);               
+        
+        // this.pago.push(this.miPago);
         /* habilito el boton */
         this.desabilitar = true;
         this.limpiarForm()
